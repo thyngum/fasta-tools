@@ -11,7 +11,7 @@ use Bio::Seq;
 use Bio::SeqIO;
 use File::Spec;
 use Getopt::Long;
-use utils
+use utils;
 
 GetOptions ( 'in=s' => \$input, 'out=s' => \$output );
 

@@ -22,7 +22,7 @@ die "Usage: fasta-split.pl -in <filename>.\n" if ( ! $input );
 my $filename = File::Spec->rel2abs($input);
 die "File \'$filename\' not found.\n" if ( ! -e $filename );
 
-(my $name, my $path, my $suffix) = fileparse($filename, qr/\.[^.]*/);
+my ($name, $path, $suffix) = fileparse($filename, qr/\.[^.]*/);
 
 my $seqio_input = Bio::SeqIO->new(-file => $filename, 
                                   -format => 'fasta' ) or die $!;

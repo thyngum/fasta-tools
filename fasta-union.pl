@@ -16,6 +16,7 @@ use Bio::SeqIO;
 use File::Basename;
 use File::Spec;
 use Getopt::Long;
+use utils;
 
 GetOptions ( 'in=s' => \$input, 'out=s' => \$output, 't' => \$tab, 'aa' => \$aa, 'gap=i' => \$gap );
 
@@ -86,7 +87,7 @@ if ( $output ) {
 }
 else {
 	print ">$name\n";
-	print $union . "\n";	
+	print sblock($union);	
 }
 
 if ( $tab ) {
