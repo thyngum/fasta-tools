@@ -1,6 +1,6 @@
 #!/usr/bin/perl
 
-# Translate the sequences in a multi-FASTA sequence file. Designed for a file with  
+# Translates the sequences in a multi-FASTA sequence file. Designed for a file with  
 # coding (spliced) sequences of genes (CDSs).
 
 # 	fasta-translate.pl -s -in <filename> [-out <output>]
