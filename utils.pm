@@ -31,6 +31,43 @@ sub complement {
 	return $rev;
 }
 
+sub basecounts {
+
+	# Counts bases from a sequence and returns the counts as a list (A, C, G, T, other) or
+	# (A, C, G, T, a, c, g, t, other)
+	# 	Usage: basecounts(sequence, case-sensitive)
+
+	my $seq = $_[0];
+	my $case_sensitive = $_[1];
+
+	my $len = length($seq);
+
+	if ( $case_sensitive ) {
+		my $A = $seq =~ tr/A//;
+		my $C = $seq =~ tr/C//;
+		my $G = $seq =~ tr/G//;
+		my $T = $seq =~ tr/T//;
+		my $a = $seq =~ tr/a//;
+		my $c = $seq =~ tr/c//;
+		my $g = $seq =~ tr/g//;
+		my $t = $seq =~ tr/t//;
+		my $sum = $A + $C + $G + $T + $a + $c + $g + $t;
+		my $other = $len - $sum;
+
+		return($A, $C, $G, $T, $a, $c, $g, $t, $other);
+	}
+	else {
+		$seq = uc $seq;
+		my $A = $seq =~ tr/A//;
+		my $C = $seq =~ tr/C//;
+		my $G = $seq =~ tr/G//;
+		my $T = $seq =~ tr/T//;
+		my $sum = $A + $C + $G + $T;
+		my $other = $len - $sum;
+
+		return($A, $C, $G, $T, $other);
+	}
+}
 
 sub sblock {
 
