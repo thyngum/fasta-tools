@@ -1,7 +1,7 @@
 #!/usr/bin/perl
 
 # Extracts the sequences from a multi-FASTA file and saves them to individual FASTA 
-# files. Output files are named after the corresponding primary IDs of each sequence.
+# files. Output files are named after the corresponding primary IDs.
 
 # 	fasta-split.pl -in <filename>
 
