@@ -1,3 +1,5 @@
+# Do not use this script!!
+
 #!/usr/bin/perl
 
 # Change the description of each sequence in a FASTA file according to a
