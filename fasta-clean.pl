@@ -11,6 +11,7 @@ use Bio::Seq;
 use Bio::SeqIO;
 use File::Spec;
 use Getopt::Long;
+use utils
 
 GetOptions ( 'in=s' => \$input, 'out=s' => \$output );
 
@@ -39,6 +40,6 @@ while ( my $seq = $seqio_object->next_seq ) {
 	}
 	else {
 		print ">" . $seq->display_id() . "\n";
-		print $seq->seq() . "\n";
+		print sblock($seq->seq());
 	}		
 }
