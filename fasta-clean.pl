@@ -20,7 +20,7 @@ die "Usage: fasta-clean.pl -in <filename> [-out <output>]\n" if ( ! $input );
 my $filename = File::Spec->rel2abs($input);
 die "File \'$filename\' not found.\n" if ( ! -e $filename );
 
-my $seqio_object = Bio::SeqIO->new(-file => $filename, 
+my $seqio_in = Bio::SeqIO->new(-file => $filename, 
                                    -format => 'fasta' ) or die $!;
 
 if ( $output ) {
@@ -29,7 +29,7 @@ if ( $output ) {
                                  -format => 'fasta');	
 }
 
-while ( my $seq = $seqio_object->next_seq ) {
+while ( my $seq = $seqio_in->next_seq ) {
 
 	my $tmp = $seq->display_id();
 	$seq->desc("");

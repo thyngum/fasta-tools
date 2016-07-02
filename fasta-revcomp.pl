@@ -35,7 +35,7 @@ my $seqio_in = Bio::SeqIO->new(-file => $filename,
 if ( $output ) {
 	my $output_filename = File::Spec->rel2abs($output);
 	$seqio_out = Bio::SeqIO->new(-file => ">$output_filename", 
-                                 -format => 'fasta');	
+	                             -format => 'fasta');	
 }
 
 $count = 0;
@@ -60,4 +60,5 @@ while ( $seq = $seqio_in->next_seq ) {
 		print ">" . $seq->display_id() . " " . $seq->desc() . "\n";
 		print sblock($seq->seq());
 	}	
-}	
+}
+
