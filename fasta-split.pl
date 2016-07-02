@@ -17,7 +17,7 @@ use Getopt::Long;
 
 GetOptions ( 'in=s' => \$input );
 
-die "Usage: fasta-split.pl -in <filename>.\n" if ( ! $input );
+die "Usage: fasta-split.pl -in <filename>\n" if ( ! $input );
 
 my $filename = File::Spec->rel2abs($input);
 die "File \'$filename\' not found.\n" if ( ! -e $filename );
