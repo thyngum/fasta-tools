@@ -6,10 +6,10 @@
 
 # 		-in 	Input multi-FASTA file
 #		-out 	Ouput filename (outputs to SDTOUT by default)
-#		-aa		Input sequences are amino acid sequences (default is nucleotide)
+#		-aa	Input sequences are amino acid sequences (default is nucleotide)
 # 		-gap	Add a gap of <n> Ns or Xs between each individual sequence.
-# 		-t		Write a table file (.tab) in EMBL format with the coordinates of
-# 	  			of the original sequences (only for nucleotide sequences).
+# 		-t	Write a table file (.tab) in EMBL format with the coordinates of
+# 	  		of the original sequences (only for nucleotide sequences).
 
 use Bio::Seq;
 use Bio::SeqIO;
