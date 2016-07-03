@@ -8,9 +8,9 @@ sub complement {
 
 	my $seq = uc $_[0];
 
-	$rev = "";
+	my $rev = "";
 	for ( my $i = 0; $i < length($seq); $i++ ) {
-		$char = substr $seq, $i, 1;
+		my $char = substr $seq, $i, 1;
 		if ( $char eq 'A' ) {
 			$rev .= 'T';
 		}
@@ -34,7 +34,7 @@ sub complement {
 sub basecounts {
 
 	# Counts bases from a sequence and returns the counts as a list (A, C, G, T, other) or
-	# (A, C, G, T, a, c, g, t, other)
+	# (A, C, G, T, a, c, g, t, other) if case-sensitive = 1.
 	# 	Usage: basecounts(sequence, case-sensitive)
 
 	my $seq = $_[0];
@@ -71,7 +71,7 @@ sub basecounts {
 
 sub sblock {
 
-	# Returns a sequence block with n chars per line (n = 60 by default)
+	# Returns a sequence block with n chars per line (n = 60 by default).
 	# 	Usage: sblock(sequence, n)
 
 	my ( $seq, $n ) = @_;
