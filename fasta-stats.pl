@@ -3,7 +3,7 @@
 # Prints basic stats of a multi-FASTA file. It can also read any other sequence file
 # format supported by BioPerl. 
 
-# 	fasta-stats.pl [-f <format>] [-d] [-p] -in <filename>
+#   fasta-stats.pl [-f <format>] [-d] [-p] -in <filename>
 
 #   	-f   	Input format: fasta, fastq, genbank, etc. (guessed if omitted)
 # 	-c      Clean output (minimum descriptions, suitable for redirection)

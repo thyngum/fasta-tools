@@ -2,11 +2,11 @@
 
 # Change the case of sequences in a multi-FASTA file.
 
-# 	fasta-case.pl <-u/l> -in <filename> [-out <output>]
+#   fasta-case.pl <-u/l> -in <filename> [-out <output>]
 
-# 		-in 	Input multi-FASTA file
-#		-out 	Ouput filename (outputs to SDTOUT by default)
-# 		-u/l	Change to uppercase/lowercase. 
+# 	-in 	Input multi-FASTA file
+#	-out 	Ouput filename (outputs to SDTOUT by default)
+# 	-u/l	Change to uppercase/lowercase. 
 
 # Script written by Alejandro Llanes (thyngum@gmail.com)
 

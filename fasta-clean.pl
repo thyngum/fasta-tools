@@ -2,10 +2,10 @@
 
 # Clean the headers of the sequences in a multi-FASTA file leaving only primary IDs.
 
-#  fasta-clean.pl -in <filename> [-out <output>] 
+#   fasta-clean.pl -in <filename> [-out <output>] 
 
-# 		-in 	Input multi-FASTA file
-#		-out 	Ouput filename (outputs to SDTOUT by default)
+# 	-in 	Input multi-FASTA file
+#	-out 	Ouput filename (outputs to SDTOUT by default)
 
 use Bio::Seq;
 use Bio::SeqIO;

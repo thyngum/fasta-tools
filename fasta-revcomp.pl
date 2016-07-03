@@ -3,12 +3,12 @@
 # Converts each sequence in a multi-FASTA file to its reverse, complement or 
 # reverse-complement counterpart.
 
-# 	fasta-revcomp.pl [-r] [-c] -in <filename> [-out <output>]
+#   fasta-revcomp.pl [-r] [-c] -in <filename> [-out <output>]
 
-# 		-in 	Input multi-FASTA file
-#		-out 	Ouput filename (outputs to SDTOUT by default)
-# 		-r   	Reverse the sequence
-# 		-c   	Convert sequence to its to complement
+# 	-in 	Input multi-FASTA file
+#	-out 	Ouput filename (outputs to SDTOUT by default)
+# 	-r   	Reverse the sequence
+# 	-c   	Convert sequence to its to complement
 
 # Script written by Alejandro Llanes (thyngum@gmail.com)
 

@@ -3,9 +3,9 @@
 # Extracts the sequences from a multi-FASTA file and saves them to individual FASTA 
 # files. Output files are named after the corresponding primary IDs.
 
-# 	fasta-split.pl -in <filename>
+#   fasta-split.pl -in <filename>
 
-# 		-in 	Input multi-FASTA file
+# 	-in 	Input multi-FASTA file
 
 # Script written by Alejandro Llanes (thyngum@gmail.com)
 

@@ -2,14 +2,14 @@
 
 # Concatenates all the sequences in a multi-FASTA file. 
 
-# 	fasta-union.pl [-aa] [-gap <n>] [-t] -in <filename> [-out <output>]
+#   fasta-union.pl [-aa] [-gap <n>] [-t] -in <filename> [-out <output>]
 
-# 		-in 	Input multi-FASTA file
-#		-out 	Ouput filename (outputs to SDTOUT by default)
-#		-aa	Input sequences are amino acid sequences (default is nucleotide)
-# 		-gap	Add a gap of <n> Ns or Xs between each individual sequence.
-# 		-t	Write a table file (.tab) in EMBL format with the coordinates of
-# 	  		of the original sequences (only for nucleotide sequences).
+# 	-in 	Input multi-FASTA file
+#	-out 	Ouput filename (outputs to SDTOUT by default)
+#	-aa	Input sequences are amino acid sequences (default is nucleotide)
+# 	-gap	Add a gap of <n> Ns or Xs between each individual sequence.
+# 	-t	Write a table file (.tab) in EMBL format with the coordinates of
+# 		of the original sequences (only for nucleotide sequences).
 
 use Bio::Seq;
 use Bio::SeqIO;

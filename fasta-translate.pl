@@ -3,10 +3,10 @@
 # Translates the sequences in a multi-FASTA sequence file. Designed for a file with  
 # coding (spliced) sequences of genes (CDSs).
 
-# 	fasta-translate.pl -s -in <filename> [-out <output>]
+#   fasta-translate.pl -s -in <filename> [-out <output>]
 
-# 		-in 	Input multi-FASTA file
-#		-out 	Ouput filename (outputs to SDTOUT by default)
+# 	-in 	Input multi-FASTA file
+#	-out 	Ouput filename (outputs to SDTOUT by default)
 
 # Script written by Alejandro Llanes (thyngum@gmail.com)
 

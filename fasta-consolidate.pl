@@ -2,10 +2,10 @@
 
 # Cluster identical sequences in a multi-FASTA file.
 
-#  fasta-consolidate.pl -in <filename> [-out <output>] 
+#   fasta-consolidate.pl -in <filename> [-out <output>] 
 
-# 		-in 	Input multi-FASTA file
-#		-out 	Ouput filename (outputs to SDTOUT by default)
+# 	-in 	Input multi-FASTA file
+#	-out 	Ouput filename (outputs to SDTOUT by default)
 
 # WARNING: Probably not suitable for very large sequences or datasets!
 
