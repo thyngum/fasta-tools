@@ -6,7 +6,7 @@
 #   fasta-stats.pl [-f <format>] [-d] [-p] -in <filename>
 
 #   	-f   	Input format: fasta, fastq, genbank, etc. (guessed if omitted)
-# 	-c      Clean output (minimum descriptions, suitable for redirection)
+#  	-c      Clean output (minimum descriptions, suitable for redirection)
 #   	-d	Detailed stats (including base counts)
 #   	-p	Also prints a tab-separated list with description and length of 
 # 		individual sequences to STDOUT.
@@ -15,6 +15,10 @@ use Bio::Seq;
 use Bio::SeqIO;
 use File::Spec;
 use Getopt::Long;
+
+# Import local package utils.pm
+use FindBin;
+use lib $FindBin::Bin;
 use utils;
 
 GetOptions ( 'in=s' => \$input, 'f=s' => \$format, 'd' => \$detailed, 'p' => \$print );

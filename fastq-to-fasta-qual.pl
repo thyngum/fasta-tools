@@ -38,6 +38,6 @@ $out_qual_obj = Bio::SeqIO->new(-file   => ">$qual_file",
 
 while ( $seq = $in_seq_obj->next_seq ) {
 	$out_fasta_obj->write_seq($seq);
-    $out_qual_obj->write_seq($seq);
-    $count++;
+	$out_qual_obj->write_seq($seq);
+	$count++;
 }

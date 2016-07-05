@@ -14,6 +14,10 @@ use Bio::Seq;
 use Bio::SeqIO;
 use File::Spec;
 use Getopt::Long;
+
+# Import local package utils.pm
+use FindBin;
+use lib $FindBin::Bin;
 use utils;
 
 GetOptions ( 'in=s' => \$input, 'out=s' => \$output );
