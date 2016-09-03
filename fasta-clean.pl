@@ -1,6 +1,6 @@
 #!/usr/bin/perl
 
-# Clean the headers of the sequences in a multi-FASTA file leaving only primary IDs.
+# Cleans the headers of the sequences in a multi-FASTA file leaving only primary IDs.
 
 #   fasta-clean.pl -in <filename> [-out <output>] 
 
@@ -25,7 +25,7 @@ my $filename = File::Spec->rel2abs($input);
 die "File \'$filename\' not found.\n" if ( ! -e $filename );
 
 my $seqio_in = Bio::SeqIO->new(-file => $filename, 
-                                   -format => 'fasta' ) or die $!;
+                               -format => 'fasta' ) or die $!;
 
 if ( $output ) {
 	my $output_filename = File::Spec->rel2abs($output);
