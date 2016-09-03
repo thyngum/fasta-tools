@@ -6,18 +6,18 @@
 
 #  fasta-extract.pl -l <list> -in <filename> [-out <output>]
 
-#   -l <list>	Tab-delimited file with a subsequence specification per line, 
-#				with the format:
+#    -l <list>	Tab-delimited file with a subsequence specification per line, 
+#	          	with the format:
 #
-#				ID	SOURCE	START	END
+#            	ID	SOURCE	START	END
 #
-#				Where SOURCE is a sequence in input file, and ID, START and END are
-#				the name and coordinates of the subsequence to be extracted from SOURCE.
-#				If start > end the subsequence is extracted from the reverse strand 
-#				of SOURCE (but using the positions of the forward strand). If no
-#				START and END is given, the whole source sequence is extracted.
-# 	-in 		Input multi-FASTA file
-#	-out 		Ouput filename (outputs to SDTOUT by default).
+#            	Where SOURCE is a sequence in input file, and ID, START and END are
+#            	the name and coordinates of the subsequence to be extracted from SOURCE.
+#            	If start > end the subsequence is extracted from the reverse strand 
+#            	of SOURCE (but using the positions of the forward strand). If no
+#            	START and END is given, the whole source sequence is extracted.
+#    -in 		Input multi-FASTA file
+#    -out 		Ouput filename (outputs to SDTOUT by default).
 
 # WARNING: This script loads the whole input file in memory. Be careful with
 # large sequence files (e.g. larger than the available RAM)!!!
