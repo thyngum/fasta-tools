@@ -83,8 +83,8 @@ while ( $line = <LIST> ) {
 					if ( $start > 0 and $end <= length($seq_obj->seq()) ) {
 						$subseq = $seq_obj->subseq($start, $end);
 						$subseq_obj = Bio::Seq->new(-seq => $subseq,
-													-display_id => "$id",
-													-desc => "    $source:$start..$end" );	
+						                            -display_id => "$id",
+						                            -desc => "    $source:$start..$end" );	
 						print ">" . $subseq_obj->display_id() . $subseq_obj->desc() . "\n";
 						print sblock($subseq_obj->seq());									
 						$seqio_output->write_seq($subseq_obj) if ( $output );
