@@ -46,14 +46,14 @@ die "File \'$listfile\' not found.\n" if ( ! -e $listfile );
 if ( $output ) {
 	$output_filename = File::Spec->rel2abs($output);
 	$seqio_out = Bio::SeqIO->new(-file => ">$output_filename", 
-                                 -format => 'fasta') or die $!;	
+	                             -format => 'fasta') or die $!;	
 }
 
 # Load input file in memory and open output file
 %seqs = ();
 
 $seqio_object = Bio::SeqIO->new(-file => $filename, 
-								-format => $format ) or die $!;								    
+                                -format => $format ) or die $!;								    
 
 while ( $seq = $seqio_object->next_seq ) {
 	$seqs{$seq->display_id()} = $seq->seq;
