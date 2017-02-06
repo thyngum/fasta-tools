@@ -38,6 +38,7 @@ my $count1 = 0;
 my $total1 = 0;
 my $max1;
 my $min1;
+my %seqs1 = ();
 while ( my $seq = $seqio_sub->next_seq ) {
 	$count1++;
 
@@ -45,12 +46,15 @@ while ( my $seq = $seqio_sub->next_seq ) {
 	$total1 += $len;
 	$min1 = $len if ( !$min1 || $len < $min1 );
 	$max1 = $len if ( !$max1 || $len > $max1 );
+
+	$seqs1{$seq->display_id} = $seq->seq;
 }
 my $average1 = $total1 / $count1;
 
 my $count2 = 0;
 my $max2;
 my $min2;
+my %seqs2 = ();
 while ( $seq = $seqio_qry->next_seq ) {
 	$count2++;
 
@@ -58,6 +62,8 @@ while ( $seq = $seqio_qry->next_seq ) {
 	$total2 += $len;
 	$min2 = $len if ( !$min2 || $len < $min2 );
 	$max2 = $len if ( !$max2 || $len > $max2 );	
+
+	$seqs2{$seq->display_id} = $seq->seq;
 }
 my $average2 = $total2 / $count2;
 
@@ -67,10 +73,27 @@ my $min_diff = $min1 - $min2;
 my $total_diff = $total1 - $total2;
 my $average_diff = $average1 - $average2;
 
-if ( $count_diff or  $max_diff or $min_diff or $total_diff ) {
-	print STDERR "       \tSubject\tQuery\tDiff\n";
+my $diff_str = "";
+foreach my $key ( sort keys %seqs1 ) {
+	if ( $seqs2{$key} ) {
+		my $seq_diff = length($seqs1{$key}) - length($seqs2{$key});
+		if ( $seq_diff ) {
+			$diff_str = $diff_str . "       \t$key\t$key\t$seq_diff\n";
+		}
+	}
+	else {
+		$diff_str = $diff_str . "       \t$key\t-\t-\n";
+	}
+}
+foreach $key ( sort keys %seqs2 ) {
+	unless ( $seqs1{$key} ) {
+		$diff_str = $diff_str . "       \t-\t$key\t-\n";
+	}
 }
 
+if ( $count_diff or  $max_diff or $min_diff or $total_diff or $diff_str ) {
+	print STDERR "       \tSubject\tQuery\tDiff\n";
+}
 
 if ( $count_diff != 0 ) {
 	print STDERR "Count\t$count1\t$count2\t$count_diff\n";
@@ -88,7 +111,6 @@ if ( $total_diff != 0 ) {
 	print STDERR "Total\t$total1\t$total2\t$total_diff\n";
 }
 
-
-#  "Average\t", sprintf("%.0f", $average), "\n",
-
-=comment
+if ( $diff_str ne "" ) {
+	print $diff_str;
+}
