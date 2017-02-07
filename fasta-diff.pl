@@ -5,14 +5,20 @@
 
 #   fasta-diff.pl [-f <format>] -sub <filename> -qry <filename>
 
-#   	-f   	Input format: fasta, fastq, genbank, etc. (guessed if omitted)
+#      -f     Input format: fasta, fastq, genbank, etc. (guessed if omitted).
+#      -d     Detailed output (if sequences differ, includes them in output).    
 
 use Bio::Seq;
 use Bio::SeqIO;
 use File::Spec;
 use Getopt::Long;
 
-GetOptions ( 'sub=s' => \$sub, 'qry=s' => \$qry, 'f=s' => \$format );
+# Import local package utils.pm
+use FindBin;
+use lib $FindBin::Bin;
+use utils;
+
+GetOptions ( 'sub=s' => \$sub, 'qry=s' => \$qry, 'f=s' => \$format, 'd' => \$detailed );
 
 die "Usage: fasta-diff.pl [-f <format>] -sub <filename> -qry <filename>\n" if ( ! $sub or ! $qry );
 
@@ -33,6 +39,7 @@ else {
 	                           -file   => $qry_file) or die $!;	
 }
 
+# Process subject file
 my $len;
 my $count1 = 0;
 my $total1 = 0;
@@ -51,6 +58,7 @@ while ( my $seq = $seqio_sub->next_seq ) {
 }
 my $average1 = $total1 / $count1;
 
+# Process query file
 my $count2 = 0;
 my $max2;
 my $min2;
@@ -67,35 +75,44 @@ while ( $seq = $seqio_qry->next_seq ) {
 }
 my $average2 = $total2 / $count2;
 
+# Compute global differences
 my $count_diff = $count1 - $count2;
 my $max_diff = $max1 - $max2;
 my $min_diff = $min1 - $min2;
 my $total_diff = $total1 - $total2;
 my $average_diff = $average1 - $average2;
 
+# Find differences in individual sequences
 my $diff_str = "";
 foreach my $key ( sort keys %seqs1 ) {
 	if ( $seqs2{$key} ) {
-		my $seq_diff = length($seqs1{$key}) - length($seqs2{$key}); # Sequences differ in lenght
-		$seq_diff = $seq_diff . "***" if ( $seqs1{$key} ne $seqs2{$key} ); # Sequences differ in the sequence per se
+		my $length_diff = length($seqs1{$key}) - length($seqs2{$key}); 
+		if ( $length_diff ) {
+			$seq_diff = $length_diff . " ";
+		}
+		else {
+			$seq_diff = "";
+		}
+		$seq_diff = $seq_diff . "(sequences differ)" if ( $seqs1{$key} ne $seqs2{$key} ); 
 		if ( $seq_diff ) {
-			$diff_str = $diff_str . "       \t$key\t$key\t$seq_diff\n";
+			$diff_str = $diff_str . "$key\t$key\t$seq_diff\n";
+
+			if ( $detailed ) {
+				$diff_str = $diff_str . sblock($seqs1{$key}) . "---\n" . sblock($seqs2{$key});
+			}
 		}
 	}
 	else {
-		$diff_str = $diff_str . "       \t$key\t-\t-\n";
+		$diff_str = $diff_str . "$key\t-\t-\n";
 	}
 }
 foreach $key ( sort keys %seqs2 ) {
 	unless ( $seqs1{$key} ) {
-		$diff_str = $diff_str . "       \t-\t$key\t-\n";
+		$diff_str = $diff_str . "-\t$key\t-\n";
 	}
 }
 
-if ( $count_diff or  $max_diff or $min_diff or $total_diff or $diff_str ) {
-	print STDERR "       \tSubject\tQuery\tDiff\n";
-}
-
+# Print differences
 if ( $count_diff != 0 ) {
 	print STDERR "Count\t$count1\t$count2\t$count_diff\n";
 }
