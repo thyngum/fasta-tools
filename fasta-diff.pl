@@ -76,7 +76,8 @@ my $average_diff = $average1 - $average2;
 my $diff_str = "";
 foreach my $key ( sort keys %seqs1 ) {
 	if ( $seqs2{$key} ) {
-		my $seq_diff = length($seqs1{$key}) - length($seqs2{$key});
+		my $seq_diff = length($seqs1{$key}) - length($seqs2{$key}); # Sequences differ in lenght
+		$seq_diff = $seq_diff . "***" if ( $seqs1{$key} ne $seqs2{$key} ); # Sequences differ in the sequence per se
 		if ( $seq_diff ) {
 			$diff_str = $diff_str . "       \t$key\t$key\t$seq_diff\n";
 		}
