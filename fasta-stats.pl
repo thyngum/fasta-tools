@@ -25,7 +25,7 @@ GetOptions ( 'in=s' => \$input, 'f=s' => \$format, 'd' => \$detailed, 'p' => \$p
 
 die "Usage: fasta-stats.pl [-f <format>] [-d] [-p] -in <filename>\n" if ( ! $input );
 
-$filename = File::Spec->rel2abs($input);
+my $filename = File::Spec->rel2abs($input);
 die "File \'$filename\' not found.\n" if ( ! -e $filename );
 
 if ( ! $format ) {
