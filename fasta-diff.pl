@@ -54,7 +54,7 @@ while ( my $seq = $seqio_sub->next_seq ) {
 	$min1 = $len if ( !$min1 || $len < $min1 );
 	$max1 = $len if ( !$max1 || $len > $max1 );
 
-	$seqs1{$seq->display_id} = $seq->seq;
+	$seqs1{$seq->display_id} = uc $seq->seq;
 }
 my $average1 = $total1 / $count1;
 
@@ -71,7 +71,7 @@ while ( $seq = $seqio_qry->next_seq ) {
 	$min2 = $len if ( !$min2 || $len < $min2 );
 	$max2 = $len if ( !$max2 || $len > $max2 );	
 
-	$seqs2{$seq->display_id} = $seq->seq;
+	$seqs2{$seq->display_id} = uc $seq->seq;
 }
 my $average2 = $total2 / $count2;
 
