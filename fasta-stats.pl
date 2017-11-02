@@ -113,7 +113,7 @@ unless ( $detailed ) {
 	}
 	print "\n";	
 
-	print "$count\t",
+	print STDERR "$count\t",
 	  "$total_size\t",
 	  "$min\t",
 	  sprintf("%.0f", $average), "\t",
