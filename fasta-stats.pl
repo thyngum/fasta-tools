@@ -111,7 +111,7 @@ unless ( $detailed ) {
 		  "Gaps\t",
 		  "GC%";
 	}
-	print "\n";	
+	print STDERR "\n";	
 
 	print STDERR "$count\t",
 	  "$total_size\t",
@@ -120,12 +120,12 @@ unless ( $detailed ) {
 	  "$max";
 
 	if ( $type eq 'dna' ) {
-		print "\t$other_count\t",
+		print STDERR "\t$other_count\t",
 		  sprintf("%.2f", $other_percent), "\t",
 		  "$gap_count\t",
 		  sprintf("%.2f", $gc_content), "\t";
 	}
-	print "\n";	
+	print STDERR "\n";	
 }
 else {
 	print STDERR "Count\t$count\n",
@@ -135,7 +135,7 @@ else {
 	  "Total\t$total_size\n";
 
 	if ( $type eq 'dna' ) {
-		print "GC%\t", sprintf("%.2f", $gc_content), "\n",
+		print STDERR "GC%\t", sprintf("%.2f", $gc_content), "\n",
 		  "  A\t$A_count\t", sprintf("%.2f", ($A_count/$total_size)*100), "\n",
 		  "  C\t$C_count\t", sprintf("%.2f", ($C_count/$total_size)*100), "\n",
 		  "  G\t$G_count\t", sprintf("%.2f", ($G_count/$total_size)*100), "\n",
