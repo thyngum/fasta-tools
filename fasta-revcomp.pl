@@ -29,7 +29,7 @@ die "Usage: fasta-revcomp.pl [-r] [-c] -in <filename> [-out <output>]\n" if ( ! 
 my $filename = File::Spec->rel2abs($input);
 die "File \'$filename\' not found.\n" if ( ! -e $filename );
 
-if ( ( ! $reverse ) && ( ! $complement ) ) {
+if ( ( ! $reverse ) and ( ! $complement ) ) {
 	die "Nothing to do, use -r to reverse the sequence and/or -c to get its complement!\n";
 }
 

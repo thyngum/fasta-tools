@@ -1,0 +1,104 @@
+# Do not use this script!!
+
+#!/usr/bin/perl
+
+# Change the description of each sequence in a FASTA file according to a
+# given prefix. Use the original filename as prefix for description
+# if nothing is specified via the -prefix option. Save the modified FASTA 
+# file according to the -out option, or append "_renamed" to the 
+# original filename if no output is specified.
+
+#  fasta-rename [-a] [-c] [-v] -in <filename> [-prefix <prefix>] [-out <output>] 
+
+# -a	Append the original description to the prefix (this option does not
+#       autoenumerate!). 
+# -c 	Clean the description line, leave only the primary ID. If no prefix
+#		is specified, the original ID is used.
+# -v	Verbose ..
+#
+
+#TODO: Enable support for FASTQ files. 
+
+use Bio::Seq;
+use Bio::SeqIO;
+use File::Basename;
+use File::Spec;
+use Getopt::Long;
+
+GetOptions ( 'in=s' => \$input, 'a' => \$append, 'c' => \$clean, 'v' => \$verbose, 'prefix=s' => \$prefix, 'out=s' => \$output );
+
+die "Usage: fasta-rename.pl -in <filename> [-a] [-c] [-prefix <prefix>] [-out <output>]\n" if ( ! $input );
+
+$filename = File::Spec->rel2abs($input);
+die "File \'$filename\' not found.\n" if ( ! -e $filename );
+($name, $path, $suffix) = fileparse($filename, qr/\.[^.]*/);
+
+if ( ! $output ) {
+	$output = $path . $name . "_renamed" . $suffix;			
+}
+else {		
+	$output = File::Spec->rel2abs($output);
+}
+
+$just_clean = 0;
+if ( ( $clean ) && ( ! $prefix ) ) {
+	print STDERR "Cleaning description lines. No change to primary IDs.\n\n" if ( $verbose );	
+	$just_clean = 1;
+}
+else {
+	$prefix = $name if ( ! $prefix );
+	print STDERR "Using \'$prefix\' as prefix.\n\n" if ( $verbose );
+}
+
+# Count sequences in input file for padding zeroes
+$seqio_object = Bio::SeqIO->new(-file => $filename, 
+                                -format => 'fasta' ) or die $!;
+
+$seqio_output = Bio::SeqIO->new(-file => ">$output" ,
+                                -format => 'fasta');
+
+$count = 0;
+while ( $seq = $seqio_object->next_seq ) {
+	$count++;
+}
+$total_sequences = $count;
+$len = length($total_sequences);
+
+# Reload input file for renaming
+$seqio_object = Bio::SeqIO->new(-file => $filename, 
+                                -format => 'fasta' ) or die $!;
+
+$seqio_output = Bio::SeqIO->new(-file => ">$output" ,
+                                -format => 'fasta');
+
+$count = 0;
+while ( $seq = $seqio_object->next_seq ) {
+	$count++;
+
+	if ( $just_clean ) {
+		print STDERR $seq->display_id() . "\n" if ( $verbose );
+		$tmp = $seq->display_id();
+		$empty = "";
+		$seq->desc($empty);
+		$seq->display_id($tmp);
+	}
+	else {
+		print STDERR $seq->display_id(), " --> " if ( $verbose );
+		if ( ! $append ) {
+			$desc = $prefix . sprintf("%0${len}d", $count);
+		}
+		else {
+			$desc = $prefix . $seq->display_id();
+		}
+		if ( $clean ) {	
+			$empty = "";
+			$seq->desc($empty);			
+		}
+		$seq->display_id($desc);
+		print STDERR $seq->display_id(), "\n" if ( $verbose );	
+	}
+	$seqio_output->write_seq($seq);	
+}
+
+print STDERR "\n$count sequences written to $output\n" if ( $verbose );
+

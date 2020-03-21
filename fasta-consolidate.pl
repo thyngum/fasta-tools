@@ -1,6 +1,6 @@
 #!/usr/bin/perl
 
-# Cluster identical sequences in a multi-FASTA file.
+# Clusters identical sequences in a multi-FASTA file.
 
 #   fasta-consolidate.pl -in <filename> [-out <output>] 
 
